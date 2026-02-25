@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<autoszervizeles>
+    <auto autorendszam="ASD123">
+        <szin></szin>
+        <motor></motor>
+        <karbantartasok></karbantartasok>
+        <muszakiallapot></muszakiallapot>
+    </auto>
+
+    <szervizbevitel szervizbevitelid="">
+        <Autoszerviz></Autoszerviz>
+    </szervizbevitel>
+
+    <karbantartas a_k_sz="" a_k_a="">
+        <munkalatokleirasa></munkalatokleirasa>
+        <koltseg></koltseg>
+        <munkavallaloneve></munkavallaloneve>
+        <datum></datum>
+    </karbantartas>
+
+    <tulajdonos tulajid="">
+         <emailcim></emailcim>
+         <telefonszam></telefonszam>
+         <szuletesidatum></szuletesidatum>
+         <nev>
+            <vezeteknev></vezeteknev>
+            <keresztnev></keresztnev>
+         </nev>
+         <lakcim>
+            <iranyitoszam></iranyitoszam>
+            <varos></varos>
+            <utcahazszam></utcahazszam>
+         </lakcim>
+    </tulajdonos>
+
+    <birtokol a_b_t="" a_b_a="">
+        <vasarlasdatuma></vasarlasdatuma>
+        <vasarlasiar></vasarlasiar>
+        <eladasdatuma></eladasdatuma>
+    </birtokol>
+
+    <marka markaid="">
+        <nev></nev>
+        <szekhely></szekhely>
+        <modellek></modellek>
+        <statisztika></statisztika>
+    </marka>
+
+    <gyartott a_gy_m="" a_gy_a="">
+        <tipus></tipus>
+        <gyartasiev></gyartasiev>
+    </gyartott>
+</autoszervizeles>
