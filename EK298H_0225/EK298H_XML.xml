@@ -37,7 +37,7 @@
         <nev>Ötlet Elek</nev>
         <reszleg>Saucier</reszleg>
         <vegzettseg>Szakközépiskola</vegzettseg>
-        <vegzettseg>Le Cordon Blue</vegzettseg>
+        <vegzettseg>Le Cordon Bleu</vegzettseg>
         <vegzettseg>Paul Bocuse Institute</vegzettseg>
     </szakacs>
 
@@ -45,19 +45,19 @@
         <nev>Kocsis Tibor</nev>
         <reszleg>Entremetier</reszleg>
         <vegzettseg>Szakközépiskola</vegzettseg>
-        <vegzettseg>Le Cordon Blue</vegzettseg>
+        <vegzettseg>Le Cordon Bleu</vegzettseg>
     </szakacs>
 
     <szakacs szkod="sz3" e_sz="e2">
         <nev>Tálas Levente</nev>
-        <reszleg>Gardamanger</reszleg>
+        <reszleg>Gardemanger</reszleg>
         <vegzettseg>Szakközépiskola</vegzettseg>
     </szakacs>
 
     <gyakornok gykod="gy1" e_gy="e1">
         <nev>Bordás Dávid</nev>
         <gyakorlat>
-            <kezdete>2021.08.20</kezdete>
+            <kezdete>2021-08-20</kezdete>
             <idotartama>2 hónap</idotartama>
         </gyakorlat>
         <muszak>Délelőtt</muszak>
@@ -67,7 +67,7 @@
     <gyakornok gykod="gy2" e_gy="e2">
         <nev>Szilágyi István</nev>
         <gyakorlat>
-            <kezdete>2021.06.01</kezdete>
+            <kezdete>2021-06-01</kezdete>
             <idotartama>4 hónap</idotartama>
         </gyakorlat>
         <muszak>Délután</muszak>
@@ -76,7 +76,7 @@
     <gyakornok gykod="gy3" e_gy="e1">
         <nev>Szentpétery Ferenc</nev>
         <gyakorlat>
-            <kezdete>2021.04.02</kezdete>
+            <kezdete>2021-04-02</kezdete>
             <idotartama>10 hónap</idotartama>
         </gyakorlat>
         <muszak>Délelőtt</muszak>
@@ -113,10 +113,22 @@
         </cim>
     </vendeg>
 
-    <rendeles e_v_v="v1" e_v_e="e1">
-        <osszeg></osszeg>
-        <etel></etel>
+    <rendeles rkod="r1" vkod="v1" ekod="e1">
+        <etel>Rántott hús</etel>
+        <osszeg>4500</osszeg>
+        <datum>2021-09-15</datum>
     </rendeles>
 
+    <rendeles rkod="r2" vkod="v2" ekod="e2">
+        <etel>Libamáj terrine</etel>
+        <osszeg>8500</osszeg>
+        <datum>2021-09-20</datum>
+    </rendeles>
+
+    <rendeles rkod="r3" vkod="v3" ekod="e1">
+        <etel>Grillezett lazac</etel>
+        <osszeg>6200</osszeg>
+        <datum>2021-10-01</datum>
+    </rendeles>
 
 </vendeglatas>
