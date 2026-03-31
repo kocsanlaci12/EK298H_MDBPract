@@ -1,0 +1,52 @@
+<autoszervizeles>
+    <auto autorendszam="ASD123">
+        <szin>Fekete</szin>
+        <motor>2.0 TDI Dízel</motor>
+        <karbantartasok>3</karbantartasok>
+        <muszakiallapot>Kiváló</muszakiallapot>
+    </auto>
+
+    <szervizbevitel szervizbevitelid="SZB001">
+        <Autoszerviz>Rapid Autószerviz Kft.</Autoszerviz>
+    </szervizbevitel>
+
+    <karbantartas a_k_sz="SZB001" a_k_a="ASD123">
+        <munkalatokleirasa>Olajcsere, szűrők cseréje, fékbetét ellenőrzés</munkalatokleirasa>
+        <koltseg>45000</koltseg>
+        <munkavallaloneve>Kiss Gábor</munkavallaloneve>
+        <datum>2023-05-12</datum>
+    </karbantartas>
+
+    <tulajdonos tulajid="T001">
+         <emailcim>kovacs.peter@email.hu</emailcim>
+         <telefonszam>+36201234567</telefonszam>
+         <szuletesidatum>1988-03-14</szuletesidatum>
+         <nev>
+            <vezeteknev>Kovács</vezeteknev>
+            <keresztnev>Péter</keresztnev>
+         </nev>
+         <lakcim>
+            <iranyitoszam>4025</iranyitoszam>
+            <varos>Debrecen</varos>
+            <utcahazszam>Piac utca 12.</utcahazszam>
+         </lakcim>
+    </tulajdonos>
+
+    <birtokol a_b_t="T001" a_b_a="ASD123">
+        <vasarlasdatuma>2020-07-01</vasarlasdatuma>
+        <vasarlasiar>3200000</vasarlasiar>
+        <eladasdatuma/>
+    </birtokol>
+
+    <marka markaid="M001">
+        <nev>Volkswagen</nev>
+        <szekhely>Wolfsburg, Németország</szekhely>
+        <modellek>Golf, Passat, Polo, Tiguan</modellek>
+        <statisztika>2023-ban 4.9 millió eladott jármű</statisztika>
+    </marka>
+
+    <gyartott a_gy_m="M001" a_gy_a="ASD123">
+        <tipus>Golf VII</tipus>
+        <gyartasiev>2018</gyartasiev>
+    </gyartott>
+</autoszervizeles>
