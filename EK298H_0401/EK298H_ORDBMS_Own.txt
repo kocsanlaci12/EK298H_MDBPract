@@ -1,0 +1,88 @@
+1. XML fájl feltöltése:
+
+tábla létrehozás:
+
+
+Adat feltöltés:
+
+
+1. Feladat– XML adatok kiolvasása XMLTABLE segítségével
+
+a)Az összesétterem kilistázása:
+
+
+
+b)Szűrés: csak az 5 csillagos éttermek:
+
+
+
+c)Szakácsok kilistázása az éttermükkel együtt:
+
+2.Feladat: UDT(ObjectType) létrehozása az XML struktúra alapján
+
+a)Cím típus(az XML <cim> elem alapján):
+
+
+
+b)Étterem típusbbeágyazott objektummal és tagfüggvénnyel:
+
+
+
+c)TYPEBODY tagfüggvény implementálása:
+
+
+
+3.Feladat: ObjectTable létrehozása és feltöltése XML adatokból
+
+a)Object Table létrehozása:
+
+
+
+b)Feltöltés XML-ből: INSERT… SELECT + XMLTABLE:
+
+
+
+c)Ellenőrzés: az Object Table tartalma:
+
+
+
+4.Feladat: Lekérdezések az Object Table-ön
+
+a)Tagfüggvény hívása lekérdezésben:
+
+
+
+b)Aggregáció–átlagos csillagszám városonként:
+
+
+
+5.Feladat: Módosítás és törlés:
+
+a)UDT attribútum módosítása:
+
+
+b)3 csillagosnál kevesebb étterem törlése:
+
+
+
+
+6.Feladat:Kollekciós típus:a szakács végzettségei:
+
+a)VARRAY típus létrehozása:
+
+
+
+b)Szakács típus VARRAY-jel:
+
+
+
+
+
+c)Feltöltés kézzel (az XML vegzettség adatai alapján):
+
+
+
+
+
+d)VARRAY elemeinek lekérdezése TABLE() operátorra:
+
