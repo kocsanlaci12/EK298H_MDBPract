@@ -8,8 +8,30 @@
         <muszakiallapot>Kiváló</muszakiallapot>
     </auto>
 
+    <auto autorendszam="XYZ789">
+        <szin>Piros</szin>
+        <motor>1.4 Benzin</motor>
+        <karbantartasok>2</karbantartasok>
+        <muszakiallapot>Jó</muszakiallapot>
+    </auto>
+
+    <auto autorendszam="LMN456">
+        <szin>Kék</szin>
+        <motor>1.6 Dízel</motor>
+        <karbantartasok>4</karbantartasok>
+        <muszakiallapot>Közepes</muszakiallapot>
+    </auto>
+
     <szervizbevitel szervizbevitelid="SZB001">
         <Autoszerviz>Rapid Autószerviz Kft.</Autoszerviz>
+    </szervizbevitel>
+
+    <szervizbevitel szervizbevitelid="SZB002">
+        <Autoszerviz>Gyors Szerviz Bt.</Autoszerviz>
+    </szervizbevitel>
+
+    <szervizbevitel szervizbevitelid="SZB003">
+        <Autoszerviz>Profi Car Szerviz</Autoszerviz>
     </szervizbevitel>
 
     <karbantartas a_k_sz="SZB001" a_k_a="ASD123">
@@ -17,6 +39,20 @@
         <koltseg>45000</koltseg>
         <munkavallaloneve>Kiss Gábor</munkavallaloneve>
         <datum>2023-05-12</datum>
+    </karbantartas>
+
+    <karbantartas a_k_sz="SZB002" a_k_a="XYZ789">
+        <munkalatokleirasa>Fékcsere, olajcsere</munkalatokleirasa>
+        <koltseg>38000</koltseg>
+        <munkavallaloneve>Nagy István</munkavallaloneve>
+        <datum>2023-06-20</datum>
+    </karbantartas>
+
+    <karbantartas a_k_sz="SZB003" a_k_a="LMN456">
+        <munkalatokleirasa>Kuplung csere, futómű állítás</munkalatokleirasa>
+        <koltseg>120000</koltseg>
+        <munkavallaloneve>Szabó László</munkavallaloneve>
+        <datum>2023-07-15</datum>
     </karbantartas>
 
     <tulajdonos tulajid="T001">
@@ -34,9 +70,51 @@
          </lakcim>
     </tulajdonos>
 
+    <tulajdonos tulajid="T002">
+         <emailcim>nagy.anna@email.hu</emailcim>
+         <telefonszam>+36304567890</telefonszam>
+         <szuletesidatum>1992-11-05</szuletesidatum>
+         <nev>
+            <vezeteknev>Nagy</vezeteknev>
+            <keresztnev>Anna</keresztnev>
+         </nev>
+         <lakcim>
+            <iranyitoszam>1117</iranyitoszam>
+            <varos>Budapest</varos>
+            <utcahazszam>Fehérvári út 45.</utcahazszam>
+         </lakcim>
+    </tulajdonos>
+
+    <tulajdonos tulajid="T003">
+         <emailcim>szabo.laszlo@email.hu</emailcim>
+         <telefonszam>+36701234567</telefonszam>
+         <szuletesidatum>1985-08-22</szuletesidatum>
+         <nev>
+            <vezeteknev>Szabó</vezeteknev>
+            <keresztnev>László</keresztnev>
+         </nev>
+         <lakcim>
+            <iranyitoszam>6720</iranyitoszam>
+            <varos>Szeged</varos>
+            <utcahazszam>Kárász utca 8.</utcahazszam>
+         </lakcim>
+    </tulajdonos>
+
     <birtokol a_b_t="T001" a_b_a="ASD123">
         <vasarlasdatuma>2020-07-01</vasarlasdatuma>
         <vasarlasiar>3200000</vasarlasiar>
+        <eladasdatuma></eladasdatuma>
+    </birtokol>
+
+    <birtokol a_b_t="T002" a_b_a="XYZ789">
+        <vasarlasdatuma>2021-03-15</vasarlasdatuma>
+        <vasarlasiar>2500000</vasarlasiar>
+        <eladasdatuma></eladasdatuma>
+    </birtokol>
+
+    <birtokol a_b_t="T003" a_b_a="LMN456">
+        <vasarlasdatuma>2019-09-10</vasarlasdatuma>
+        <vasarlasiar>2800000</vasarlasiar>
         <eladasdatuma></eladasdatuma>
     </birtokol>
 
@@ -47,8 +125,33 @@
         <statisztika>2023-ban 4.9 millió eladott jármű</statisztika>
     </marka>
 
+    <marka markaid="M002">
+        <nev>Toyota</nev>
+        <szekhely>Toyota City, Japán</szekhely>
+        <modellek>Corolla, Camry, Yaris, RAV4</modellek>
+        <statisztika>2023-ban 10.5 millió eladott jármű</statisztika>
+    </marka>
+
+    <marka markaid="M003">
+        <nev>Ford</nev>
+        <szekhely>Dearborn, USA</szekhely>
+        <modellek>Focus, Fiesta, Mondeo, Kuga</modellek>
+        <statisztika>2023-ban 4.2 millió eladott jármű</statisztika>
+    </marka>
+
     <gyartott a_gy_m="M001" a_gy_a="ASD123">
         <tipus>Golf VII</tipus>
         <gyartasiev>2018</gyartasiev>
     </gyartott>
+
+    <gyartott a_gy_m="M002" a_gy_a="XYZ789">
+        <tipus>Corolla</tipus>
+        <gyartasiev>2020</gyartasiev>
+    </gyartott>
+
+    <gyartott a_gy_m="M003" a_gy_a="LMN456">
+        <tipus>Focus</tipus>
+        <gyartasiev>2017</gyartasiev>
+    </gyartott>
+
 </autoszervizeles>

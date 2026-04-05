@@ -1,4 +1,4 @@
-1. XML fájl feltöltése:
+XML fájl feltöltése:
 
 tábla létrehozás:
 CREATE TABLE vendeglatas_xml (

@@ -1,88 +1,436 @@
-1. XML fájl feltöltése:
+XML fájl feltöltése:
 
 tábla létrehozás:
 
+CREATE TABLE autoszerviz_xml (
+    id NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    adat XMLTYPE
+);
 
 Adat feltöltés:
 
+INSERT INTO autoszerviz_xml (adat)
+VALUES (
+    XMLType(
+        TO_CLOB('<autoszervizeles>
+
+    <auto autorendszam="ASD123">
+        <szin>Fekete</szin>
+        <motor>2.0 TDI Dízel</motor>
+        <karbantartasok>3</karbantartasok>
+        <muszakiallapot>Kiváló</muszakiallapot>
+    </auto>
+
+    <auto autorendszam="XYZ789">
+        <szin>Piros</szin>
+        <motor>1.4 Benzin</motor>
+        <karbantartasok>2</karbantartasok>
+        <muszakiallapot>Jó</muszakiallapot>
+    </auto>
+
+    <auto autorendszam="LMN456">
+        <szin>Kék</szin>
+        <motor>1.6 Dízel</motor>
+        <karbantartasok>4</karbantartasok>
+        <muszakiallapot>Közepes</muszakiallapot>
+    </auto>
+') ||
+
+        TO_CLOB('
+    <szervizbevitel szervizbevitelid="SZB001">
+        <Autoszerviz>Rapid Autószerviz Kft.</Autoszerviz>
+    </szervizbevitel>
+
+    <szervizbevitel szervizbevitelid="SZB002">
+        <Autoszerviz>Gyors Szerviz Bt.</Autoszerviz>
+    </szervizbevitel>
+
+    <szervizbevitel szervizbevitelid="SZB003">
+        <Autoszerviz>Profi Car Szerviz</Autoszerviz>
+    </szervizbevitel>
+
+    <karbantartas a_k_sz="SZB001" a_k_a="ASD123">
+        <munkalatokleirasa>Olajcsere, szűrők cseréje, fékbetét ellenőrzés</munkalatokleirasa>
+        <koltseg>45000</koltseg>
+        <munkavallaloneve>Kiss Gábor</munkavallaloneve>
+        <datum>2023-05-12</datum>
+    </karbantartas>
+
+    <karbantartas a_k_sz="SZB002" a_k_a="XYZ789">
+        <munkalatokleirasa>Fékcsere, olajcsere</munkalatokleirasa>
+        <koltseg>38000</koltseg>
+        <munkavallaloneve>Nagy István</munkavallaloneve>
+        <datum>2023-06-20</datum>
+    </karbantartas>
+') ||
+
+        TO_CLOB('
+    <karbantartas a_k_sz="SZB003" a_k_a="LMN456">
+        <munkalatokleirasa>Kuplung csere, futómű állítás</munkalatokleirasa>
+        <koltseg>120000</koltseg>
+        <munkavallaloneve>Szabó László</munkavallaloneve>
+        <datum>2023-07-15</datum>
+    </karbantartas>
+
+    <tulajdonos tulajid="T001">
+         <emailcim>kovacs.peter@email.hu</emailcim>
+         <telefonszam>+36201234567</telefonszam>
+         <szuletesidatum>1988-03-14</szuletesidatum>
+         <nev>
+            <vezeteknev>Kovács</vezeteknev>
+            <keresztnev>Péter</keresztnev>
+         </nev>
+         <lakcim>
+            <iranyitoszam>4025</iranyitoszam>
+            <varos>Debrecen</varos>
+            <utcahazszam>Piac utca 12.</utcahazszam>
+         </lakcim>
+    </tulajdonos>
+
+    <tulajdonos tulajid="T002">
+         <emailcim>nagy.anna@email.hu</emailcim>
+         <telefonszam>+36304567890</telefonszam>
+') ||
+
+        TO_CLOB('
+         <szuletesidatum>1992-11-05</szuletesidatum>
+         <nev>
+            <vezeteknev>Nagy</vezeteknev>
+            <keresztnev>Anna</keresztnev>
+         </nev>
+         <lakcim>
+            <iranyitoszam>1117</iranyitoszam>
+            <varos>Budapest</varos>
+            <utcahazszam>Fehérvári út 45.</utcahazszam>
+         </lakcim>
+    </tulajdonos>
+
+    <tulajdonos tulajid="T003">
+         <emailcim>szabo.laszlo@email.hu</emailcim>
+         <telefonszam>+36701234567</telefonszam>
+         <szuletesidatum>1985-08-22</szuletesidatum>
+         <nev>
+            <vezeteknev>Szabó</vezeteknev>
+            <keresztnev>László</keresztnev>
+         </nev>
+         <lakcim>
+            <iranyitoszam>6720</iranyitoszam>
+            <varos>Szeged</varos>
+            <utcahazszam>Kárász utca 8.</utcahazszam>
+         </lakcim>
+    </tulajdonos>
+') ||
+
+        TO_CLOB('
+    <birtokol a_b_t="T001" a_b_a="ASD123">
+        <vasarlasdatuma>2020-07-01</vasarlasdatuma>
+        <vasarlasiar>3200000</vasarlasiar>
+        <eladasdatuma></eladasdatuma>
+    </birtokol>
+
+    <birtokol a_b_t="T002" a_b_a="XYZ789">
+        <vasarlasdatuma>2021-03-15</vasarlasdatuma>
+        <vasarlasiar>2500000</vasarlasiar>
+        <eladasdatuma></eladasdatuma>
+    </birtokol>
+
+    <birtokol a_b_t="T003" a_b_a="LMN456">
+        <vasarlasdatuma>2019-09-10</vasarlasdatuma>
+        <vasarlasiar>2800000</vasarlasiar>
+        <eladasdatuma></eladasdatuma>
+    </birtokol>
+
+    <marka markaid="M001">
+        <nev>Volkswagen</nev>
+        <szekhely>Wolfsburg, Németország</szekhely>
+        <modellek>Golf, Passat, Polo, Tiguan</modellek>
+        <statisztika>2023-ban 4.9 millió eladott jármű</statisztika>
+    </marka>
+
+    <marka markaid="M002">
+        <nev>Toyota</nev>
+        <szekhely>Toyota City, Japán</szekhely>
+') ||
+
+        TO_CLOB('
+        <modellek>Corolla, Camry, Yaris, RAV4</modellek>
+        <statisztika>2023-ban 10.5 millió eladott jármű</statisztika>
+    </marka>
+
+    <marka markaid="M003">
+        <nev>Ford</nev>
+        <szekhely>Dearborn, USA</szekhely>
+        <modellek>Focus, Fiesta, Mondeo, Kuga</modellek>
+        <statisztika>2023-ban 4.2 millió eladott jármű</statisztika>
+    </marka>
+
+    <gyartott a_gy_m="M001" a_gy_a="ASD123">
+        <tipus>Golf VII</tipus>
+        <gyartasiev>2018</gyartasiev>
+    </gyartott>
+
+    <gyartott a_gy_m="M002" a_gy_a="XYZ789">
+        <tipus>Corolla</tipus>
+        <gyartasiev>2020</gyartasiev>
+    </gyartott>
+
+    <gyartott a_gy_m="M003" a_gy_a="LMN456">
+        <tipus>Focus</tipus>
+        <gyartasiev>2017</gyartasiev>
+    </gyartott>
+
+</autoszervizeles>')
+    )
+);
+
+COMMIT;
 
 1. Feladat– XML adatok kiolvasása XMLTABLE segítségével
 
-a)Az összesétterem kilistázása:
+a)Az összes autó kilistázása:
 
+SELECT x.autorendszam,
+       x.szin,
+       x.motor,
+       x.karbantartasok,
+       x.muszakiallapot
+FROM autoszerviz_xml a,
+     XMLTABLE('/autoszervizeles/auto'
+       PASSING a.adat
+       COLUMNS
+         autorendszam VARCHAR2(20) PATH '@autorendszam',
+         szin VARCHAR2(50) PATH 'szin',
+         motor VARCHAR2(100) PATH 'motor',
+         karbantartasok NUMBER PATH 'karbantartasok',
+         muszakiallapot VARCHAR2(50) PATH 'muszakiallapot'
+     ) x;
 
+b)Szűrés: csak a kiválló állapotú autók:
 
-b)Szűrés: csak az 5 csillagos éttermek:
+SELECT x.autorendszam,
+       x.szin,
+       x.motor,
+       x.muszakiallapot
+FROM autoszerviz_xml a,
+     XMLTABLE('/autoszervizeles/auto'
+       PASSING a.adat
+       COLUMNS
+         autorendszam VARCHAR2(20) PATH '@autorendszam',
+         szin VARCHAR2(50) PATH 'szin',
+         motor VARCHAR2(100) PATH 'motor',
+         muszakiallapot VARCHAR2(50) PATH 'muszakiallapot'
+     ) x
+WHERE x.muszakiallapot = 'Kiváló';
 
+c)Karbantartások kilistázása az autókkal együtt:
 
+SELECT k.a_k_a AS rendszam,
+       a.szin,
+       a.motor,
+       k.munkalatokleirasa,
+       k.koltseg,
+       k.munkavallaloneve,
+       k.datum
+FROM autoszerviz_xml x,
 
-c)Szakácsok kilistázása az éttermükkel együtt:
+     XMLTABLE('/autoszervizeles/karbantartas'
+       PASSING x.adat
+       COLUMNS
+         a_k_a VARCHAR2(20) PATH '@a_k_a',
+         munkalatokleirasa VARCHAR2(500) PATH 'munkalatokleirasa',
+         koltseg NUMBER PATH 'koltseg',
+         munkavallaloneve VARCHAR2(100) PATH 'munkavallaloneve',
+         datum DATE PATH 'datum'
+     ) k,
+
+     XMLTABLE('/autoszervizeles/auto'
+       PASSING x.adat
+       COLUMNS
+         autorendszam VARCHAR2(20) PATH '@autorendszam',
+         szin VARCHAR2(50) PATH 'szin',
+         motor VARCHAR2(100) PATH 'motor'
+     ) a
+
+WHERE k.a_k_a = a.autorendszam;
 
 2.Feladat: UDT(ObjectType) létrehozása az XML struktúra alapján
 
-a)Cím típus(az XML <cim> elem alapján):
+a)Cím típus(az XML <lakcim> és <nev> elem alapján):
 
+CREATE OR REPLACE TYPE lakcim_t AS OBJECT (
+    iranyitoszam VARCHAR2(10),
+    varos VARCHAR2(100),
+    utcahazszam VARCHAR2(200)
+);
 
+COMMIT;
 
-b)Étterem típusbbeágyazott objektummal és tagfüggvénnyel:
+CREATE OR REPLACE TYPE nev_t AS OBJECT (
+    vezeteknev VARCHAR2(100),
+    keresztnev VARCHAR2(100)
+);
 
+b)Tulajdonos típusbbeágyazott objektummal és tagfüggvénnyel:
 
+CREATE OR REPLACE TYPE tulajdonos_t AS OBJECT (
+    tulajid VARCHAR2(10),
+    emailcim VARCHAR2(200),
+    telefonszam VARCHAR2(20),
+    szuletesidatum DATE,
+    nev nev_t,
+    lakcim lakcim_t,
+    
+    MEMBER FUNCTION leiras RETURN VARCHAR2
+);
 
 c)TYPEBODY tagfüggvény implementálása:
 
+CREATE OR REPLACE TYPE BODY tulajdonos_t AS
 
+    MEMBER FUNCTION leiras RETURN VARCHAR2 IS
+    BEGIN
+        RETURN SELF.nev.vezeteknev || ' ' || SELF.nev.keresztnev
+               || ' – ' || SELF.lakcim.varos
+               || ' (' || SELF.emailcim || ')';
+    END leiras;
+
+END;
 
 3.Feladat: ObjectTable létrehozása és feltöltése XML adatokból
 
 a)Object Table létrehozása:
 
-
+CREATE TABLE tulajdonosok OF tulajdonos_t (
+    PRIMARY KEY (tulajid)
+);
 
 b)Feltöltés XML-ből: INSERT… SELECT + XMLTABLE:
 
-
+INSERT INTO tulajdonosok
+SELECT tulajdonos_t(
+    x.tulajid,
+    x.emailcim,
+    x.telefonszam,
+    x.szuletesidatum,
+    nev_t(x.vezeteknev, x.keresztnev),
+    lakcim_t(x.iranyitoszam, x.varos, x.utcahazszam)
+)
+FROM autoszerviz_xml a,
+     XMLTABLE('/autoszervizeles/tulajdonos'
+       PASSING a.adat
+       COLUMNS
+         tulajid VARCHAR2(10) PATH '@tulajid',
+         emailcim VARCHAR2(200) PATH 'emailcim',
+         telefonszam VARCHAR2(20) PATH 'telefonszam',
+         szuletesidatum DATE PATH 'szuletesidatum',
+         vezeteknev VARCHAR2(100) PATH 'nev/vezeteknev',
+         keresztnev VARCHAR2(100) PATH 'nev/keresztnev',
+         iranyitoszam VARCHAR2(10) PATH 'lakcim/iranyitoszam',
+         varos VARCHAR2(100) PATH 'lakcim/varos',
+         utcahazszam VARCHAR2(200) PATH 'lakcim/utcahazszam'
+     ) x;
 
 c)Ellenőrzés: az Object Table tartalma:
 
-
+SELECT t.tulajid,
+       t.emailcim,
+       t.telefonszam,
+       t.szuletesidatum,
+       t.nev.vezeteknev,
+       t.nev.keresztnev,
+       t.lakcim.iranyitoszam,
+       t.lakcim.varos,
+       t.lakcim.utcahazszam
+FROM tulajdonosok t;
 
 4.Feladat: Lekérdezések az Object Table-ön
 
 a)Tagfüggvény hívása lekérdezésben:
 
+SELECT t.leiras() AS leiras
+FROM tulajdonosok t;
 
+b)Aggregáció–átlagos tulajdonosok száma városonként:
 
-b)Aggregáció–átlagos csillagszám városonként:
-
-
+SELECT t.lakcim.varos AS varos,
+       COUNT(*) AS db
+FROM tulajdonosok t
+GROUP BY t.lakcim.varos
+ORDER BY db DESC;
 
 5.Feladat: Módosítás és törlés:
 
 a)UDT attribútum módosítása:
 
+UPDATE tulajdonosok t
+SET t.emailcim = 'opel.astra@freemail.com'
+WHERE t.tulajid = 'T001';
 
-b)3 csillagosnál kevesebb étterem törlése:
+b)30 évesnél fiatalabb tulajdonos törlése:
 
+DELETE FROM tulajdonosok t
+WHERE EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM t.szuletesidatum) < 30;
 
+Ellenőrzés:
 
+SELECT COUNT(*) AS maradt
+FROM tulajdonosok;
 
-6.Feladat:Kollekciós típus:a szakács végzettségei:
+6.Feladat:Kollekciós típus:
 
 a)VARRAY típus létrehozása:
 
+CREATE OR REPLACE TYPE karbantartas_va AS VARRAY(5) OF VARCHAR2(500);
 
+b)Autó típus VARRAY-jel:
 
-b)Szakács típus VARRAY-jel:
+CREATE OR REPLACE TYPE auto_t AS OBJECT (
+    autorendszam VARCHAR2(20),
+    szin VARCHAR2(50),
+    motor VARCHAR2(100),
+    muszakiallapot VARCHAR2(50),
+    karbantartasok karbantartas_va
+);
 
+COMMIT;
 
-
-
+CREATE TABLE autok OF auto_t (
+    PRIMARY KEY (autorendszam)
+);
 
 c)Feltöltés kézzel (az XML vegzettség adatai alapján):
 
+INSERT INTO autok VALUES (
+    auto_t(
+        'ASD123',
+        'Fekete',
+        '2.0 TDI Dízel',
+        'Kiváló',
+        karbantartas_va(
+            'Olajcsere, szűrők cseréje, fékbetét ellenőrzés',
+            'Fék ellenőrzés',
+            'Gumiabroncs ellenőrzés'
+        )
+    )
+);
 
-
-
+INSERT INTO autok VALUES (
+    auto_t(
+        'XYZ789',
+        'Piros',
+        '1.4 Benzin',
+        'Jó',
+        karbantartas_va(
+            'Fékcsere, olajcsere',
+            'Kipufogó ellenőrzés'
+        )
+    )
+);
 
 d)VARRAY elemeinek lekérdezése TABLE() operátorra:
 
+SELECT a.autorendszam,
+       a.szin,
+       v.COLUMN_VALUE AS karbantartas
+FROM autok a,
+     TABLE(a.karbantartasok) v;
