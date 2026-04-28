@@ -1,0 +1,180 @@
+{
+	"autoszervizeles": {
+		"auto": [
+			{
+				"szin": "Fekete",
+				"motor": "2.0 TDI Dízel",
+				"karbantartasok": "3",
+				"muszakiallapot": "Kiváló",
+				"_autorendszam": "ASD123"
+			},
+			{
+				"szin": "Piros",
+				"motor": "1.4 Benzin",
+				"karbantartasok": "2",
+				"muszakiallapot": "Jó",
+				"_autorendszam": "XYZ789"
+			},
+			{
+				"szin": "Kék",
+				"motor": "1.6 Dízel",
+				"karbantartasok": "4",
+				"muszakiallapot": "Közepes",
+				"_autorendszam": "LMN456"
+			}
+		],
+		"szervizbevitel": [
+			{
+				"Autoszerviz": "Rapid Autószerviz Kft.",
+				"_szervizbevitelid": "SZB001"
+			},
+			{
+				"Autoszerviz": "Gyors Szerviz Bt.",
+				"_szervizbevitelid": "SZB002"
+			},
+			{
+				"Autoszerviz": "Profi Car Szerviz",
+				"_szervizbevitelid": "SZB003"
+			}
+		],
+		"karbantartas": [
+			{
+				"munkalatokleirasa": "Olajcsere, szűrők cseréje, fékbetét ellenőrzés",
+				"koltseg": "45000",
+				"munkavallaloneve": "Kiss Gábor",
+				"datum": "2023-05-12",
+				"_a_k_sz": "SZB001",
+				"_a_k_a": "ASD123"
+			},
+			{
+				"munkalatokleirasa": "Fékcsere, olajcsere",
+				"koltseg": "38000",
+				"munkavallaloneve": "Nagy István",
+				"datum": "2023-06-20",
+				"_a_k_sz": "SZB002",
+				"_a_k_a": "XYZ789"
+			},
+			{
+				"munkalatokleirasa": "Kuplung csere, futómű állítás",
+				"koltseg": "120000",
+				"munkavallaloneve": "Szabó László",
+				"datum": "2023-07-15",
+				"_a_k_sz": "SZB003",
+				"_a_k_a": "LMN456"
+			}
+		],
+		"tulajdonos": [
+			{
+				"emailcim": "kovacs.peter@email.hu",
+				"telefonszam": "+36201234567",
+				"szuletesidatum": "1988-03-14",
+				"nev": {
+					"vezeteknev": "Kovács",
+					"keresztnev": "Péter"
+				},
+				"lakcim": {
+					"iranyitoszam": "4025",
+					"varos": "Debrecen",
+					"utcahazszam": "Piac utca 12."
+				},
+				"_tulajid": "T001"
+			},
+			{
+				"emailcim": "nagy.anna@email.hu",
+				"telefonszam": "+36304567890",
+				"szuletesidatum": "1992-11-05",
+				"nev": {
+					"vezeteknev": "Nagy",
+					"keresztnev": "Anna"
+				},
+				"lakcim": {
+					"iranyitoszam": "1117",
+					"varos": "Budapest",
+					"utcahazszam": "Fehérvári út 45."
+				},
+				"_tulajid": "T002"
+			},
+			{
+				"emailcim": "szabo.laszlo@email.hu",
+				"telefonszam": "+36701234567",
+				"szuletesidatum": "1985-08-22",
+				"nev": {
+					"vezeteknev": "Szabó",
+					"keresztnev": "László"
+				},
+				"lakcim": {
+					"iranyitoszam": "6720",
+					"varos": "Szeged",
+					"utcahazszam": "Kárász utca 8."
+				},
+				"_tulajid": "T003"
+			}
+		],
+		"birtokol": [
+			{
+				"vasarlasdatuma": "2020-07-01",
+				"vasarlasiar": "3200000",
+				"eladasdatuma": "",
+				"_a_b_t": "T001",
+				"_a_b_a": "ASD123"
+			},
+			{
+				"vasarlasdatuma": "2021-03-15",
+				"vasarlasiar": "2500000",
+				"eladasdatuma": "",
+				"_a_b_t": "T002",
+				"_a_b_a": "XYZ789"
+			},
+			{
+				"vasarlasdatuma": "2019-09-10",
+				"vasarlasiar": "2800000",
+				"eladasdatuma": "",
+				"_a_b_t": "T003",
+				"_a_b_a": "LMN456"
+			}
+		],
+		"marka": [
+			{
+				"nev": "Volkswagen",
+				"szekhely": "Wolfsburg, Németország",
+				"modellek": "Golf, Passat, Polo, Tiguan",
+				"statisztika": "2023-ban 4.9 millió eladott jármű",
+				"_markaid": "M001"
+			},
+			{
+				"nev": "Toyota",
+				"szekhely": "Toyota City, Japán",
+				"modellek": "Corolla, Camry, Yaris, RAV4",
+				"statisztika": "2023-ban 10.5 millió eladott jármű",
+				"_markaid": "M002"
+			},
+			{
+				"nev": "Ford",
+				"szekhely": "Dearborn, USA",
+				"modellek": "Focus, Fiesta, Mondeo, Kuga",
+				"statisztika": "2023-ban 4.2 millió eladott jármű",
+				"_markaid": "M003"
+			}
+		],
+		"gyartott": [
+			{
+				"tipus": "Golf VII",
+				"gyartasiev": "2018",
+				"_a_gy_m": "M001",
+				"_a_gy_a": "ASD123"
+			},
+			{
+				"tipus": "Corolla",
+				"gyartasiev": "2020",
+				"_a_gy_m": "M002",
+				"_a_gy_a": "XYZ789"
+			},
+			{
+				"tipus": "Focus",
+				"gyartasiev": "2017",
+				"_a_gy_m": "M003",
+				"_a_gy_a": "LMN456"
+			}
+		]
+	}
+}

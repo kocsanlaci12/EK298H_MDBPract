@@ -1,0 +1,313 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$ref": "#/definitions/Welcome8",
+    "definitions": {
+        "Welcome8": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "vendeglatas": {
+                    "$ref": "#/definitions/Vendeglatas"
+                }
+            },
+            "required": [
+                "vendeglatas"
+            ],
+            "title": "Welcome8"
+        },
+        "Vendeglatas": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "etterem": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Etterem"
+                    }
+                },
+                "foszakacs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Foszakac"
+                    }
+                },
+                "szakacs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Szakac"
+                    }
+                },
+                "gyakornok": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Gyakornok"
+                    }
+                },
+                "vendeg": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Vendeg"
+                    }
+                },
+                "rendeles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Rendele"
+                    }
+                }
+            },
+            "required": [
+                "etterem",
+                "foszakacs",
+                "gyakornok",
+                "rendeles",
+                "szakacs",
+                "vendeg"
+            ],
+            "title": "Vendeglatas"
+        },
+        "Etterem": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "nev": {
+                    "type": "string"
+                },
+                "cim": {
+                    "$ref": "#/definitions/CIM"
+                },
+                "csillag": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "_ekod": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_ekod",
+                "cim",
+                "csillag",
+                "nev"
+            ],
+            "title": "Etterem"
+        },
+        "CIM": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "varos": {
+                    "type": "string"
+                },
+                "utca": {
+                    "type": "string"
+                },
+                "hazszam": {
+                    "type": "string",
+                    "format": "integer"
+                }
+            },
+            "required": [
+                "hazszam",
+                "utca",
+                "varos"
+            ],
+            "title": "CIM"
+        },
+        "Foszakac": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "nev": {
+                    "type": "string"
+                },
+                "eletkor": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "vegzettseg": {
+                    "type": "string"
+                },
+                "_fkod": {
+                    "type": "string"
+                },
+                "_e_f": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_e_f",
+                "_fkod",
+                "eletkor",
+                "nev",
+                "vegzettseg"
+            ],
+            "title": "Foszakac"
+        },
+        "Gyakornok": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "nev": {
+                    "type": "string"
+                },
+                "gyakorlat": {
+                    "$ref": "#/definitions/Gyakorlat"
+                },
+                "muszak": {
+                    "$ref": "#/definitions/Muszak"
+                },
+                "_gykod": {
+                    "type": "string"
+                },
+                "_e_gy": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_e_gy",
+                "_gykod",
+                "gyakorlat",
+                "muszak",
+                "nev"
+            ],
+            "title": "Gyakornok"
+        },
+        "Gyakorlat": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "kezdete": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "idotartama": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "idotartama",
+                "kezdete"
+            ],
+            "title": "Gyakorlat"
+        },
+        "Rendele": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "etel": {
+                    "type": "string"
+                },
+                "osszeg": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "datum": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "_rkod": {
+                    "type": "string"
+                },
+                "_vkod": {
+                    "type": "string"
+                },
+                "_ekod": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_ekod",
+                "_rkod",
+                "_vkod",
+                "datum",
+                "etel",
+                "osszeg"
+            ],
+            "title": "Rendele"
+        },
+        "Szakac": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "nev": {
+                    "type": "string"
+                },
+                "reszleg": {
+                    "type": "string"
+                },
+                "vegzettseg": {
+                    "$ref": "#/definitions/Vegzettseg"
+                },
+                "_szkod": {
+                    "type": "string"
+                },
+                "_e_sz": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_e_sz",
+                "_szkod",
+                "nev",
+                "reszleg",
+                "vegzettseg"
+            ],
+            "title": "Szakac"
+        },
+        "Vendeg": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "nev": {
+                    "type": "string"
+                },
+                "eletkor": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "cim": {
+                    "$ref": "#/definitions/CIM"
+                },
+                "_vkod": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_vkod",
+                "cim",
+                "eletkor",
+                "nev"
+            ],
+            "title": "Vendeg"
+        },
+        "Muszak": {
+            "anyOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "title": "Muszak"
+        },
+        "Vegzettseg": {
+            "anyOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "title": "Vegzettseg"
+        }
+    }
+}

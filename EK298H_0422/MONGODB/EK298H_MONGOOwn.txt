@@ -1,0 +1,144 @@
+Ellenőrzés és kézi beszúrás
+
+db.auto.find()
+db.tulajdonos.find()
+show collections
+
+db.auto.insertOne({
+szin: "Fehér",
+motor: "1.8 Benzin",
+karbantartasok: "1",
+muszakiallapot: "Újszerű",
+_autorendszam: "ABC111"
+})
+
+db.tulajdonos.insertOne({
+emailcim: "teszt@email.hu",
+telefonszam: "+36123456789",
+szuletesidatum: "1995-01-01",
+nev: { vezeteknev: "Teszt", keresztnev: "Elek" },
+lakcim: { iranyitoszam: "1000", varos: "Budapest", utcahazszam: "Teszt utca 1." },
+_tulajid: "T999"
+})
+
+Projekció
+
+db.auto.find({}, { szin: 1, muszakiallapot: 1, _id: 0 })
+
+Legalább 3 karbantartas:
+
+db.auto.find({ karbantartasok: { $gte: "3" } })
+
+Debrecen vagy jó állapotú
+
+db.tulajdonos.find({
+$or: [{ "lakcim.varos": "Debrecen" }, { muszakiallapot: "Kiváló" }]
+})
+
+Top 3 autó karbantartások szerint:
+
+db.auto.find().sort({ karbantartasok: -1 }).limit(3)
+
+1990 után született tulajdonosok:
+
+db.tulajdonos.find({ szuletesidatum: { $gte: "1990-01-01" } })
+
+Műszaki állapot módosítása:
+
+db.auto.updateOne(
+{ _autorendszam: "LMN456" },
+{ $set: { muszakiallapot: "Jó" } }
+)
+
+Új munkálat hozzáadása:
+
+db.karbantartas.updateOne(
+{ _a_k_a: "ASD123" },
+{ $push: { munkalatokleirasa: "Gumi csere" } }
+)
+
+Gyenge állapotú autók törlése:
+db.auto.deleteMany({ muszakiallapot: "Közepes" })
+db.auto.countDocuments()
+
+Explain index nélkül
+
+db.auto.find({ _autorendszam: "ASD123" }).explain("executionStats")
+
+index létrehozása:
+
+db.auto.createIndex({ _autorendszam: 1 })
+
+Explain index után:
+
+db.auto.find({ _autorendszam: "ASD123" }).explain("executionStats")
+
+Összetett index:
+
+db.auto.createIndex({ szin: 1, karbantartasok: -1 })
+
+Listázás és törlés
+
+db.auto.getIndexes()
+db.auto.dropIndex("_autorendszam_1")
+
+Autók szín szerint + átlag karbantartás:
+
+db.ettermek.aggregate([
+db.auto.aggregate([
+{
+$group: {
+_id: "$szin",
+db_auto: { $sum: 1 },
+atlag_karbantartas: { $avg: { $toInt: "$karbantartasok" } }
+}
+},
+{ $sort: { atlag_karbantartas: -1 } }
+])
+
+$unwind – munkavállalók kibontása
+
+db.karbantartas.aggregate([
+{ $group: {
+_id: "$munkavallaloneve",
+munkak_szama: { $sum: 1 }
+}},
+{ $sort: { munkak_szama: -1 } }
+])
+
+Lookup – autók és karbantartások összekapcsolása
+
+db.karbantartas.aggregate([
+{
+$lookup: {
+from: "auto",
+localField: "_a_k_a",
+foreignField: "_autorendszam",
+as: "auto_adatok"
+}
+},
+{ $unwind: "$auto_adatok" },
+{ $match: { "auto_adatok.muszakiallapot": "Kiváló" } },
+{
+$project: {
+_id: 0,
+munkavallaloneve: 1,
+datum: 1,
+auto: "$auto_adatok._autorendszam",
+allapot: "$auto_adatok.muszakiallapot"
+}
+}
+])
+
+Legidősebb autó (gyártási év alapján):
+
+db.gyartott.aggregate([
+{ $sort: { gyartasiev: 1 } },
+{
+$group: {
+_id: "$_a_gy_m",
+legregebbi_auto: { $first: "$tipus" },
+ev: { $first: "$gyartasiev" }
+}
+}
+])
