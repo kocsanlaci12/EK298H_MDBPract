@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("XMLLinqExample")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56e0725b4ccac98275ff7c9812c8694a491a36a9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d2e10ae95b7549a129b23859d44f7bc4ef46051")]
 [assembly: System.Reflection.AssemblyProductAttribute("XMLLinqExample")]
 [assembly: System.Reflection.AssemblyTitleAttribute("XMLLinqExample")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
