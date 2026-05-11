@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+    <xs:element name="autoszervizeles">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="auto" type="autoTipus" maxOccurs="unbounded"/>
+                <xs:element name="szervizbevitel" type="szervizbevitelTipus" maxOccurs="unbounded"/>
+                <xs:element name="karbantartas" type="karbantartasTipus" maxOccurs="unbounded"/>
+                <xs:element name="tulajdonos" type="tulajdonosTipus" maxOccurs="unbounded"/>
+                <xs:element name="birtokol" type="birtokolTipus" maxOccurs="unbounded"/>
+                <xs:element name="marka" type="markaTipus" maxOccurs="unbounded"/>
+                <xs:element name="gyartott" type="gyartottTipus" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+
+        <xs:key name="auto_kulcs">
+            <xs:selector xpath="auto"/>
+            <xs:field xpath="@autorendszam"/>
+        </xs:key>
+
+        <xs:key name="szervizbevitel_kulcs">
+            <xs:selector xpath="szervizbevitel"/>
+            <xs:field xpath="@szervizbevitelid"/>
+        </xs:key>
+
+        <xs:key name="tulajdonos_kulcs">
+            <xs:selector xpath="tulajdonos"/>
+            <xs:field xpath="@tulajid"/>
+        </xs:key>
+
+        <xs:key name="marka_kulcs">
+            <xs:selector xpath="marka"/>
+            <xs:field xpath="@markaid"/>
+        </xs:key>
+
+        <xs:keyref name="szervizbevitel_karbantartas_fk" refer="szervizbevitel_kulcs">
+            <xs:selector xpath="karbantartas"/>
+            <xs:field xpath="@a_k_sz"/>
+        </xs:keyref>
+
+        <xs:keyref name="auto_karbantartas_fk" refer="auto_kulcs">
+            <xs:selector xpath="karbantartas"/>
+            <xs:field xpath="@a_k_a"/>
+        </xs:keyref>
+
+        <xs:keyref name="tulajdonos_birtokol_fk" refer="tulajdonos_kulcs">
+            <xs:selector xpath="birtokol"/>
+            <xs:field xpath="@a_b_t"/>
+        </xs:keyref>
+
+        <xs:keyref name="auto_birtokol_fk" refer="auto_kulcs">
+            <xs:selector xpath="birtokol"/>
+            <xs:field xpath="@a_b_a"/>
+        </xs:keyref>
+
+        <xs:keyref name="marka_gyartott_fk" refer="marka_kulcs">
+            <xs:selector xpath="gyartott"/>
+            <xs:field xpath="@a_gy_m"/>
+        </xs:keyref>
+
+        <xs:keyref name="auto_gyartott_fk" refer="auto_kulcs">
+            <xs:selector xpath="gyartott"/>
+            <xs:field xpath="@a_gy_a"/>
+        </xs:keyref>
+
+    </xs:element>
+
+    <xs:complexType name="autoTipus">
+        <xs:sequence>
+            <xs:element name="szin" type="xs:string"/>
+            <xs:element name="motor" type="xs:string"/>
+            <xs:element name="muszakiallapot" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="autorendszam" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="szervizbevitelTipus">
+        <xs:sequence>
+            <xs:element name="autoszerviz" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="szervizbevitelid" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="karbantartasTipus">
+        <xs:sequence>
+            <xs:element name="munkalatokleirasa" type="xs:string"/>
+            <xs:element name="koltseg" type="xs:decimal"/>
+            <xs:element name="munkavallaloneve" type="xs:string"/>
+            <xs:element name="datum" type="xs:date"/>
+        </xs:sequence>
+        <xs:attribute name="a_k_sz" type="xs:string" use="required"/>
+        <xs:attribute name="a_k_a" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="tulajdonosTipus">
+        <xs:sequence>
+            <xs:element name="emailcim" type="xs:string"/>
+            <xs:element name="telefonszam" type="xs:string"/>
+            <xs:element name="szuletesidatum" type="xs:date"/>
+            <xs:element name="nev" type="nevTipus"/>
+            <xs:element name="lakcim" type="lakcimTipus"/>
+        </xs:sequence>
+        <xs:attribute name="tulajid" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="nevTipus">
+        <xs:sequence>
+            <xs:element name="vezeteknev" type="xs:string"/>
+            <xs:element name="keresztnev" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="lakcimTipus">
+        <xs:sequence>
+            <xs:element name="iranyitoszam" type="xs:string"/>
+            <xs:element name="varos" type="xs:string"/>
+            <xs:element name="utcahazszam" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="birtokolTipus">
+        <xs:sequence>
+            <xs:element name="vasarlasdatuma" type="xs:date"/>
+            <xs:element name="vasarlasiar" type="xs:decimal"/>
+            <xs:element name="eladasdatuma" type="xs:date" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="a_b_t" type="xs:string" use="required"/>
+        <xs:attribute name="a_b_a" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="markaTipus">
+        <xs:sequence>
+            <xs:element name="nev" type="xs:string"/>
+            <xs:element name="szekhely" type="xs:string"/>
+            <xs:element name="modellek" type="xs:string" maxOccurs="unbounded"/>
+            <xs:element name="statisztika" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="markaid" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="gyartottTipus">
+        <xs:sequence>
+            <xs:element name="tipus" type="xs:string"/>
+            <xs:element name="gyartasiev" type="xs:integer"/>
+        </xs:sequence>
+        <xs:attribute name="a_gy_m" type="xs:string" use="required"/>
+        <xs:attribute name="a_gy_a" type="xs:string" use="required"/>
+    </xs:complexType>
+
+</xs:schema>

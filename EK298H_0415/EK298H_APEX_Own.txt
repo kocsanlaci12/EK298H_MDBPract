@@ -1,0 +1,216 @@
+1. feladat
+
+Ős típus:
+CREATE OR REPLACE TYPE szerviz_elem_t AS OBJECT (
+    nev VARCHAR2(100),
+
+    MEMBER FUNCTION bemutatkozas RETURN VARCHAR2,
+    STATIC FUNCTION min_kor RETURN NUMBER,
+    ORDER MEMBER FUNCTION osszehasonlit(masik szerviz_elem_t) RETURN INTEGER
+) NOT FINAL;
+/
+
+CREATE OR REPLACE TYPE BODY szerviz_elem_t AS
+
+    MEMBER FUNCTION bemutatkozas RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Nev: ' || SELF.nev;
+    END;
+
+    STATIC FUNCTION min_kor RETURN NUMBER IS
+    BEGIN
+        RETURN 0;
+    END;
+
+    ORDER MEMBER FUNCTION osszehasonlit(masik szerviz_elem_t) RETURN INTEGER IS
+    BEGIN
+        IF SELF.nev < masik.nev THEN RETURN -1;
+        ELSIF SELF.nev > masik.nev THEN RETURN 1;
+        ELSE RETURN 0;
+        END IF;
+    END;
+
+END;
+/
+
+2. feladat
+
+Autó típus:
+CREATE OR REPLACE TYPE auto_t UNDER szerviz_elem_t (
+    rendszam VARCHAR2(20),
+    szin VARCHAR2(50),
+    motor VARCHAR2(50),
+    karbantartasok NUMBER,
+    muszakiallapot VARCHAR2(50),
+
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2
+);
+/
+
+CREATE OR REPLACE TYPE BODY auto_t AS
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Auto: ' || SELF.nev || ', rendszam: ' || SELF.rendszam ||
+               ', allapot: ' || SELF.muszakiallapot;
+    END;
+END;
+/
+
+Tulajdonos típus:
+CREATE OR REPLACE TYPE tulajdonos_t UNDER szerviz_elem_t (
+    tulajid VARCHAR2(10),
+    emailcim VARCHAR2(100),
+    telefonszam VARCHAR2(20),
+
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2
+);
+/
+
+CREATE OR REPLACE TYPE BODY tulajdonos_t AS
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Tulajdonos: ' || SELF.nev || ', email: ' || SELF.emailcim;
+    END;
+END;
+/
+
+Szervizbevitel típus:
+CREATE OR REPLACE TYPE szervizbevitel_t UNDER szerviz_elem_t (
+    szervizbevitelid VARCHAR2(10),
+
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2
+);
+/
+
+CREATE OR REPLACE TYPE BODY szervizbevitel_t AS
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Szerviz: ' || SELF.nev;
+    END;
+END;
+/
+
+Márka típus:
+CREATE OR REPLACE TYPE marka_t UNDER szerviz_elem_t (
+    markaid VARCHAR2(10),
+    szekhely VARCHAR2(100),
+
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2
+);
+/
+
+CREATE OR REPLACE TYPE BODY marka_t AS
+    OVERRIDING MEMBER FUNCTION bemutatkozas RETURN VARCHAR2 IS
+    BEGIN
+        RETURN 'Marka: ' || SELF.nev || ', szekhely: ' || SELF.szekhely;
+    END;
+END;
+/
+
+3. feladat
+
+Object Table:
+CREATE TABLE autoszerviz_tbl OF szerviz_elem_t;
+
+Autók betöltése XML-ből:
+INSERT INTO autoszerviz_tbl
+SELECT auto_t(
+    x.szin,
+    x.nev,
+    x.rendszam,
+    x.motor,
+    x.karbantartasok,
+    x.muszakiallapot
+)
+FROM autoszervizeles a,
+     XMLTABLE('/autoszervizeles/auto'
+     PASSING a.adat
+     COLUMNS
+        rendszam VARCHAR2(20) PATH '@autorendszam',
+        szin VARCHAR2(50) PATH 'szin',
+        motor VARCHAR2(50) PATH 'motor',
+        karbantartasok NUMBER PATH 'karbantartasok',
+        muszakiallapot VARCHAR2(50) PATH 'muszakiallapot',
+        nev VARCHAR2(100) PATH 'motor'
+     ) x;
+
+Szervizek betöltése:
+INSERT INTO autoszerviz_tbl
+SELECT szervizbevitel_t(
+    x.Autoszerviz,
+    x.Autoszerviz,
+    x.szervizbevitelid
+)
+FROM autoszervizeles a,
+     XMLTABLE('/autoszervizeles/szervizbevitel'
+     PASSING a.adat
+     COLUMNS
+        szervizbevitelid VARCHAR2(10) PATH '@szervizbevitelid',
+        Autoszerviz VARCHAR2(100) PATH 'Autoszerviz'
+     ) x;
+
+Tulajdonosok betöltése:
+
+INSERT INTO autoszerviz_tbl
+SELECT tulajdonos_t(
+    x.vezeteknev || ' ' || x.keresztnev,
+    x.tulajid,
+    x.emailcim,
+    x.telefonszam
+)
+FROM autoszervizeles a,
+     XMLTABLE('/autoszervizeles/tulajdonos'
+     PASSING a.adat
+     COLUMNS
+        tulajid VARCHAR2(10) PATH '@tulajid',
+        emailcim VARCHAR2(100) PATH 'emailcim',
+        telefonszam VARCHAR2(20) PATH 'telefonszam',
+        vezeteknev VARCHAR2(50) PATH 'nev/vezeteknev',
+        keresztnev VARCHAR2(50) PATH 'nev/keresztnev'
+     ) x;
+
+Márkák betöltése:
+
+INSERT INTO autoszerviz_tbl
+SELECT marka_t(
+    x.nev,
+    x.nev,
+    x.markaid,
+    x.szekhely
+)
+FROM autoszervizeles a,
+     XMLTABLE('/autoszervizeles/marka'
+     PASSING a.adat
+     COLUMNS
+        markaid VARCHAR2(10) PATH '@markaid',
+        nev VARCHAR2(100) PATH 'nev',
+        szekhely VARCHAR2(100) PATH 'szekhely'
+     ) x;
+
+4.feladat:
+
+Statikus függvény:
+SELECT szerviz_elem_t.min_kor() FROM dual;
+
+Polimorf hívás:
+SELECT s.nev, s.bemutatkozas()
+FROM autoszerviz_tbl s
+ORDER BY VALUE(s);
+
+Szűrés típus szerint:
+SELECT s.nev
+FROM autoszerviz_tbl s
+WHERE VALUE(s) IS OF (auto_t);
+
+Típus konverzió:
+SELECT s.nev,
+       TREAT(VALUE(s) AS auto_t).muszakiallapot
+FROM autoszerviz_tbl s
+WHERE VALUE(s) IS OF (auto_t);
+
+5. feladat
+
+Több altípusos szűrés:
+SELECT s.nev, s.bemutatkozas()
+FROM autoszerviz_tbl s
+WHERE VALUE(s) IS OF (auto_t, tulajdonos_t);

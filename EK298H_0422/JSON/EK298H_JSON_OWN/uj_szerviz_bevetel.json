@@ -1,0 +1,10 @@
+[ {
+  "szerviz" : "Rapid Autószerviz Kft.",
+  "bevetel" : 45000.0
+}, {
+  "szerviz" : "Gyors Szerviz Bt.",
+  "bevetel" : 38000.0
+}, {
+  "szerviz" : "Profi Car Szerviz",
+  "bevetel" : 120000.0
+} ]

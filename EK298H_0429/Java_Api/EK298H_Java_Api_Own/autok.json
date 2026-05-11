@@ -1,0 +1,25 @@
+{
+  "TempList": [
+    {
+      "szin": "Sárga",
+      "motor": "2.0 Benzin",
+      "karbantartasok": "4",
+      "muszakiallapot": "Újszerű",
+      "_autorendszam": "ZSK254"
+    },
+    {
+      "szin": "Fekete",
+      "motor": "2.2 Dízel",
+      "karbantartasok": "5",
+      "muszakiallapot": "Kiváló",
+      "_autorendszam": "JKL789"
+    },
+    {
+      "szin": "Piros",
+      "motor": "1.4 Benzin",
+      "karbantartasok": "1",
+      "muszakiallapot": "Jó",
+      "_autorendszam": "POI672"
+    }
+  ]
+}

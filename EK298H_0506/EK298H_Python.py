@@ -125,7 +125,7 @@ foszakacs_coll = db["foszakacsok"]
 #     {"$set": {"csillag": 4}}    
 # )
 
-# print("\n --- 3.a)Összes étterem ---")
+# print("\n --- 3.b)Összes étterem ---")
 # for etterem in etterem_coll.find():
 #     print(etterem)
 

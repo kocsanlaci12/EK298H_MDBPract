@@ -1,0 +1,49 @@
+{
+  "TempList": [
+    {
+      "emailcim": "kisspeter@email.hu",
+      "telefonszam": "+36111111111",
+      "szuletesidatum": "1995-01-01",
+      "nev": {
+        "vezeteknev": "Kiss",
+        "keresztnev": "Péter"
+      },
+      "lakcim": {
+        "iranyitoszam": "1111",
+        "varos": "Budapest",
+        "utcahazszam": "Fő utca 1."
+      },
+      "_tulajid": "T001"
+    },
+    {
+      "emailcim": "nagyanna@email.hu",
+      "telefonszam": "+36222222222",
+      "szuletesidatum": "1988-05-10",
+      "nev": {
+        "vezeteknev": "Nagy",
+        "keresztnev": "Anna"
+      },
+      "lakcim": {
+        "iranyitoszam": "4024",
+        "varos": "Debrecen",
+        "utcahazszam": "Kossuth tér 5."
+      },
+      "_tulajid": "T002"
+    },
+    {
+      "emailcim": "szabogabor@email.hu",
+      "telefonszam": "+36333333333",
+      "szuletesidatum": "2000-09-15",
+      "nev": {
+        "vezeteknev": "Szabó",
+        "keresztnev": "Gábor"
+      },
+      "lakcim": {
+        "iranyitoszam": "6720",
+        "varos": "Szeged",
+        "utcahazszam": "Petőfi utca 10."
+      },
+      "_tulajid": "T003"
+    }
+  ]
+}
